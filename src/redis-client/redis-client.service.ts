@@ -8,6 +8,10 @@ export class RedisClientService implements OnModuleDestroy {
   private readonly logger: Logger = new Logger(RedisClientService.name);
 
   constructor(@Inject(CACHE_MANAGER) private cache: Cache) {}
+  
+  redisClient() {
+    (this.cache.store as RedisStore).client;
+  }
 
   onModuleDestroy() {
     this.disconnect();
@@ -40,6 +44,14 @@ export class RedisClientService implements OnModuleDestroy {
     //convert ttl to Milliseconds
     await this.cache.store.mset(args, ttl * 1000);
     return true;
+  }
+
+  async sadd(listName: string, member: string) {
+    (this.cache.store as RedisStore).client.sadd(listName, member);
+  }
+
+  async srem(listName: string, member: string) {
+    (this.cache.store as RedisStore).client.srem(listName, member);
   }
 
   async reset(): Promise<void> {
