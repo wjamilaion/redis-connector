@@ -7,10 +7,11 @@
   "scripts": {
     "test": "jest",
     "tsc": "tsc",
-    "build": "tsc",
+    "build": "rimraf dist && tsc",
     "jest": "jest",
     "format": "prettier \"**/*.ts\" --ignore-path ./.prettierignore --write && git status",
-    "lint": "eslint \"**/*.{ts,tsx}\""
+    "lint": "eslint \"**/*.{ts,tsx}\"",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -24,9 +25,9 @@
   "author": "waqas jamil",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/aiondigitalengineering/redis-connector/issues"
+    "url": "https://github.com/wjamilaion/redis-connector/issues"
   },
-  "homepage": "https://github.com/aiondigitalengineering/redis-connector#readme",
+  "homepage": "https://github.com/wjamilaion/redis-connector#readme",
   "devDependencies": {
     "@nestjs/cache-manager": "^2.1.0",
     "@nestjs/common": "^10.1.0",
