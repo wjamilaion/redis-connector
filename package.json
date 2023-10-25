@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aiondigitalengineering/redis-connector.git"
+    "url": "git+https://github.com/wjamilaion/redis-connector.git"
   },
   "keywords": [
     "redis",
