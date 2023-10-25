@@ -1,8 +1,9 @@
 {
   "name": "nestjs-redis-connector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "redis connector for NestJs based services",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "tsc": "tsc",
