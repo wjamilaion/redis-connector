@@ -5,6 +5,13 @@
 
 NestJS Redis Connector is a library that simplifies using Redis as a caching mechanism in your NestJS-based projects. This library provides an easy-to-use interface for connecting to a Redis server and interacting with it.
 
+## Badges
+
+[![Build Status](https://github.com/wjamilaion/redis-connector/workflows/Test%20and%20Coverage/badge.svg)](https://github.com/wjamilaion/redis-connector/actions)
+
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
 
 ## Installation
 
