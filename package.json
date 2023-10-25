@@ -1,5 +1,5 @@
 {
-  "name": "@aiondigital/redis-connector",
+  "name": "nestjs-redis-connector",
   "version": "1.0.0",
   "description": "redis connector for NestJs based services",
   "main": "dist/index.js",
