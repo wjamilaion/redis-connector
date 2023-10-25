@@ -19,10 +19,12 @@ describe('RedisClientService', () => {
       imports: [
         RedisConnectorModule.register(
           {
-            ...config.REDIS_CONNECTION,
-            ttl: 0,
+            config: {
+              ...config.REDIS_CONNECTION,
+              ttl: 0,
+            },
+            _Redis: RedisMock
           },
-          RedisMock,
         ),
       ],
     }).compile();
