@@ -10,7 +10,7 @@ export class RedisClientService implements OnModuleDestroy {
   constructor(@Inject(CACHE_MANAGER) private cache: Cache) {}
   
   redisClient() {
-    (this.cache.store as RedisStore).client;
+    return (this.cache.store as RedisStore).client;
   }
 
   onModuleDestroy() {
@@ -47,19 +47,27 @@ export class RedisClientService implements OnModuleDestroy {
   }
 
   async sadd(listName: string, member: string) {
-    (this.cache.store as RedisStore).client.sadd(listName, member);
+    this.redisClient().sadd(listName, member);
   }
 
   async srem(listName: string, member: string) {
-    (this.cache.store as RedisStore).client.srem(listName, member);
+    this.redisClient().srem(listName, member);
+  }
+
+  async smembers(listName: string): Promise<string[]> {
+    return this.redisClient().smembers(listName);
   }
 
   async reset(): Promise<void> {
     await this.cache.reset();
   }
 
-  async keys(): Promise<string[]> {
-    return this.cache.store.keys();
+  async keys(pattern?: string): Promise<string[]> {
+    return this.cache.store.keys(pattern);
+  }
+
+  async getKeysWithPattern(pattern: string): Promise<string[]> {
+    return this.keys(pattern);
   }
 
   async delValue(key: string): Promise<void> {
@@ -69,7 +77,14 @@ export class RedisClientService implements OnModuleDestroy {
   async delMValue(...key: string[]): Promise<void> {
     await this.cache.store.mdel(...key);
   }
+  async delValueWithPattern(key: string): Promise<any> {
+    const keys = await this.keys(key);
+    return this.delMValue(...keys);
+  }
+  async getTTL(key: string): Promise<any> {    
+    return await this.redisClient().ttl(key);
+  }
   disconnect(): void {
-    (this.cache.store as RedisStore).client.disconnect?.();
+    this.redisClient().disconnect?.();
   }
 }

@@ -38,10 +38,11 @@ describe('RedisClientService', () => {
   });
   describe('set/get value value', () => {
     const key = 'unit-test',
-      value = 'ok';
+      value = 'ok',
+      ttl = 120;
 
     it('should able to set key in redis', async () => {
-      expect(await redisClientService.setValue(key, value, 120)).toBe(true);
+      expect(await redisClientService.setValue(key, value, ttl)).toBe(true);
     });
 
     it('should be able to fetch value from redis', async () => {
@@ -50,6 +51,14 @@ describe('RedisClientService', () => {
 
     it('should be able to fetch keys from redis', async () => {
       expect(await redisClientService.keys()).toStrictEqual([key]);
+    });
+
+    it('should be able to fetch keys with pattern from redis', async () => {
+      expect(await redisClientService.getKeysWithPattern(`${key}*`)).toStrictEqual([key]);
+    });
+
+    it('should be able to fetch ttl from redis', async () => {
+      expect(await redisClientService.getTTL(key)).toBe(ttl);
     });
 
     it('should be able to del key from redis', async () => {
